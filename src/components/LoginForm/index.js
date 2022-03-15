@@ -35,7 +35,7 @@ class LoginForm extends Component {
 		event.preventDefault();
 		const { username, password } = this.state;
 		const userDetails = { username, password };
-		const url = "http://localhost:9000/login";
+		const url = "https://react-user-login-test.herokuapp.com/login";
 		const options = {
 			method: "POST",
 			body: JSON.stringify(userDetails),
