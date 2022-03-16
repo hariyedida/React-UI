@@ -84,6 +84,7 @@ class LoginForm extends Component {
 					>
 						<div className='login-web-logo-name-container'>
 							<img
+								alt='web-logo'
 								className='web-login-logo'
 								src='https://res.cloudinary.com/hariy/image/upload/v1647442374/Financepeer/Financepeer_new_ico_jb1phx.png'
 							/>
