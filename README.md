@@ -20,11 +20,15 @@ If you're a new user create an account by clicking on signup button.
 
 If there is no data on remote server, "No data to display, Upload a file to view" text with a button is rendered.
 
-Add .json file from localsystem by ckicking on the "Upload file" button. 
+Add provided "data.json" file by ckicking on the "Upload file" button. 
 
 The json file data is uploaded to remote server, and data is fetched from the server to rendered in UI.
 
 By clicking on "Delete data" button, data on server is removed.
+
+link: https://harifinancepeer.netlify.app/
+
+
 
 
 
