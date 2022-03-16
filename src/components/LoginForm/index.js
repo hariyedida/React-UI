@@ -82,7 +82,14 @@ class LoginForm extends Component {
 						className='login-form-sub-container'
 						onSubmit={this.onSubmitLoginDetails}
 					>
-						<h1 className='app-title'>Financepeer</h1>
+						<div className='login-web-logo-name-container'>
+							<img
+								className='web-login-logo'
+								src='https://res.cloudinary.com/hariy/image/upload/v1647442374/Financepeer/Financepeer_new_ico_jb1phx.png'
+							/>
+
+							<h1 className='app-title'>Financepeer</h1>
+						</div>
 						<h1 className='login-heading'>Login</h1>
 						<div className='login-user-field-container'>
 							<label htmlFor='username' className='login-input-label'>

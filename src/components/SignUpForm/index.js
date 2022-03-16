@@ -17,18 +17,12 @@ class SignUpForm extends Component {
 		showLoginError: false,
 	};
 
-	onSubmitSuccess = (jwtToken, userDetails) => {
-		const { history } = this.props;
-		Cookies.set("jwt_token", jwtToken, {
-			expires: 30,
-			path: "/",
-		});
-		localStorage.setItem("userDetails", JSON.stringify(userDetails));
-		history.replace("/login");
-	};
-
 	onSubmitFailure = (error) => {
 		this.setState({ errorMessage: error, showLoginError: true });
+	};
+
+	onSuccessUserCreation = (message) => {
+		this.setState({ errorMessage: message, showLoginError: true });
 	};
 
 	createNewUser = async (event) => {
@@ -40,14 +34,14 @@ class SignUpForm extends Component {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				Accept: "application/json",
 			},
 			body: JSON.stringify(userDetails),
 		};
 		const response = await fetch(url, options);
 		const data = await response.json();
-		console.log(data);
 		if (response.ok === true) {
-			this.onSubmitSuccess(data.jwt_token, userDetails);
+			this.onSuccessUserCreation(data.user_created);
 		} else {
 			this.onSubmitFailure(data.error_msg);
 		}
@@ -89,7 +83,7 @@ class SignUpForm extends Component {
 		return (
 			<div>
 				<Header />
-				<h1>signupForm</h1>
+				<h1 className='signup-label'>Signup For Free</h1>
 				<div className='create-user-container'>
 					<form
 						onSubmit={this.createNewUser}
@@ -162,7 +156,7 @@ class SignUpForm extends Component {
 								type='radio'
 								id='female'
 								placeholder='gender'
-								className='input-field'
+								className='input-field radio'
 								checked={gender === gender_list[1]}
 								value={gender_list[1]}
 								name='gender'

@@ -5,6 +5,10 @@
 	height: 100vh;
 }
 .data-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
 	width: 100%;
 	padding: 30px;
 }
@@ -12,4 +16,51 @@
 .ul-list {
 	list-style-type: none;
 	padding: 0px;
+}
+
+.btn {
+	margin-top: 20px;
+	height: 40px;
+	background: #1b1a58;
+	border-radius: 8px;
+	border: none;
+	width: 120px;
+	margin-top: 25px;
+	cursor: pointer;
+	font-family: DM Sans;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 24px;
+	color: #ffffff;
+}
+
+.delete-button {
+	height: 50px;
+	background: #1b1a58;
+	border-radius: 8px;
+	border: none;
+	width: 120px;
+	margin-top: 25px;
+	cursor: pointer;
+	font-family: DM Sans;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 24px;
+	color: #ffffff;
+}
+.failure-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.failure-img {
+	width: 70%;
+}
+
+.no-data-text {
+	color: #164687;
+	font-family: DM Sans;
 }

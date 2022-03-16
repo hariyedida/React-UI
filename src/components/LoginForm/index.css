@@ -7,6 +7,16 @@
 	background: #ffffff;
 }
 
+.login-web-logo-name-container {
+	display: flex;
+	align-items: center;
+}
+
+.web-login-logo {
+	width: 30px;
+	height: 30px;
+}
+
 @media screen and (min-width: 768px) {
 	.user-login-form-container {
 		flex-direction: row;
@@ -45,7 +55,7 @@
 	font-family: DM Sans;
 	font-style: italic;
 	font-weight: bold;
-	font-size: 24px;
+	font-size: 28px;
 	line-height: 32px;
 	color: #1b1a58;
 	margin: 8px;

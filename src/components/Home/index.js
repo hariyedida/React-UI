@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import ReactFileReader from "react-file-reader";
 import Header from "../Header";
 import UserData from "../UserData";
-import Loader from "react-loader-spinner";
+import { Bars } from "react-loader-spinner";
 import Cookies from "js-cookie";
 
 const apiStatusConstants = {
@@ -18,6 +18,8 @@ class Home extends Component {
 		inputFileData: [],
 		fetchedData: [],
 		apiStatus: apiStatusConstants.initial,
+		error: "",
+		displayError: false,
 	};
 
 	componentDidMount = () => {
@@ -26,20 +28,32 @@ class Home extends Component {
 
 	postDataToDb = async () => {
 		const { inputFileData } = this.state;
+		const dataTodb = { userData: [...inputFileData] };
 		this.setState({
 			apiStatus: apiStatusConstants.inProgress,
 		});
 		const jwtToken = Cookies.get("jwt_token");
 		const apiUrl = `https://react-user-login-test.herokuapp.com/user-table/`;
 		const options = {
+			method: "POST",
 			headers: {
 				Authorization: `Bearer ${jwtToken}`,
 				"Content-Type": "application/json",
 			},
-			method: "POST",
-			body: JSON.stringify(inputFileData),
+			body: JSON.stringify(dataTodb),
 		};
 		const response = await fetch(apiUrl, options);
+		if (response.ok) {
+			this.setState(
+				{ apiStatus: apiStatusConstants.success },
+				this.getDataFromDb
+			);
+		} else {
+			this.setState({
+				error: response.body.error_msg,
+				apiStatus: apiStatusConstants.failure,
+			});
+		}
 	};
 
 	getDataFromDb = async () => {
@@ -72,13 +86,44 @@ class Home extends Component {
 
 	renderDataFromDb = () => {
 		const { fetchedData } = this.state;
-		return (
+		return fetchedData.length > 0 ? (
 			<ul className='ul-list'>
 				{fetchedData.map((eachData) => (
 					<UserData userData={eachData} key={eachData.id} />
 				))}
 			</ul>
+		) : (
+			<>
+				<h1 className='no-data-text'>No data to display</h1>
+				<h2 className='no-data-text'>Upload a file to view</h2>
+			</>
 		);
+	};
+
+	deleteData = async () => {
+		const jwtToken = Cookies.get("jwt_token");
+		this.setState({ apiStatus: apiStatusConstants.inProgress });
+		console.log("Delete");
+		const url = "https://react-user-login-test.herokuapp.com/delete-data";
+		const options = {
+			headers: {
+				Authorization: `Bearer ${jwtToken}`,
+				"Content-Type": "application/json",
+			},
+			method: "DELETE",
+		};
+		const response = await fetch(url, options);
+		if (response.ok) {
+			this.setState(
+				{ apiStatus: apiStatusConstants.success },
+				this.getDataFromDb
+			);
+		} else {
+			this.setState(
+				{ apiStatus: apiStatusConstants.failure },
+				this.getDataFromDb
+			);
+		}
 	};
 
 	handleFiles = (files) => {
@@ -96,17 +141,22 @@ class Home extends Component {
 	};
 
 	renderFailureView = () => (
-		<div className='all-rest-failure-container'>
+		<div className='failure-container'>
 			<img
-				src='https://res.cloudinary.com/hariy/image/upload/v1642997774/TastyKitchen/cooking_1_lpi3li.png'
+				className='failure-img'
+				src='https://res.cloudinary.com/hariy/image/upload/v1647439409/Financepeer/failure-img_mopczn.png'
 				alt='not-found'
 			/>
+			<h1>Failed</h1>
+			<button onClick={this.getDataFromDb} type='button' className='btn'>
+				Retry
+			</button>
 		</div>
 	);
 
 	renderLoadingView = () => (
-		<div style={{ width: "100%", height: "280px" }}>
-			<Loader type='Oval' color='#f7931e' height='50' width='50' />
+		<div className='loader-container'>
+			<Bars color='#164687' height='50' width='50' />
 		</div>
 	);
 
@@ -125,16 +175,27 @@ class Home extends Component {
 	};
 
 	render() {
+		const { fetchedData } = this.state;
 		return (
 			<div className='home-container'>
 				<Header />
-				<h1>home</h1>
-				<ReactFileReader
-					fileTypes={[".json"]}
-					handleFiles={this.handleFiles}
-				>
-					<button className='btn'>Upload</button>
-				</ReactFileReader>
+				{fetchedData.length > 0 ? (
+					<button
+						onClick={this.deleteData}
+						className='delete-button'
+						type='button'
+					>
+						Delete data
+					</button>
+				) : (
+					<ReactFileReader
+						fileTypes={[".json"]}
+						handleFiles={this.handleFiles}
+					>
+						<button className='btn'>Upload file</button>
+					</ReactFileReader>
+				)}
+
 				<div className='data-container'>{this.renderUserInput()}</div>
 			</div>
 		);

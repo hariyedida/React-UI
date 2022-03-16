@@ -35,3 +35,25 @@
 	color: #ffffff;
 	margin: 0px;
 }
+
+.welcome-label {
+	font-family: DM Sans;
+	color: #164687;
+}
+
+.header-login-button {
+	height: 40px;
+	background: linear-gradient(170.41deg, #33f1bd -2.8%, #0091ff 206.38%);
+	border-radius: 8px;
+	border: none;
+	width: 110px;
+	margin-top: 25px;
+	cursor: pointer;
+	font-family: DM Sans;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 24px;
+	color: #ffffff;
+	margin: 0px;
+}

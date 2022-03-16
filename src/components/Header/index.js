@@ -10,6 +10,10 @@ function Header(props) {
 		localStorage.removeItem("userDetails");
 		history.replace("/login");
 	};
+	const jwtToken = Cookies.get("jwt_token");
+
+	const { username } =
+		jwtToken !== undefined && JSON.parse(localStorage.getItem("userDetails"));
 
 	return (
 		<div className='header-container'>
@@ -20,14 +24,24 @@ function Header(props) {
 					alt='web-logo'
 				/>
 			</Link>
-
-			<button
-				onClick={onClickLogout}
-				type='button'
-				className='logout-button'
-			>
-				Log out
-			</button>
+			{jwtToken !== undefined ? (
+				<>
+					<h1 className='welcome-label'>Welcome {username} </h1>
+					<button
+						onClick={onClickLogout}
+						type='button'
+						className='logout-button'
+					>
+						Log out
+					</button>
+				</>
+			) : (
+				<Link to='/login'>
+					<button className='header-login-button' type='button'>
+						Login
+					</button>
+				</Link>
+			)}
 		</div>
 	);
 }

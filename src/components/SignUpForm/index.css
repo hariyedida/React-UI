@@ -44,3 +44,9 @@
 .signup-button {
 	width: 120px;
 }
+
+.signup-label {
+	color: #164687;
+	font-family: DM Sans;
+	text-align: center;
+}
