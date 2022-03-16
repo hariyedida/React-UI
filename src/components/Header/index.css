@@ -1,0 +1,37 @@
+.header-container {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 30px;
+	box-shadow: 0px 7px 15px rgb(0 0 0 / 10%);
+	border-radius: 4px;
+	width: 100%;
+}
+
+.web-logo {
+	max-width: 180px;
+	min-width: 20%;
+	float: left;
+}
+
+.header {
+	margin: 0px;
+}
+
+.logout-button {
+	height: 40px;
+	background: linear-gradient(170.41deg, #33f1bd -2.8%, #0091ff 206.38%);
+	border-radius: 8px;
+	border: none;
+	width: 110px;
+	margin-top: 25px;
+	cursor: pointer;
+	font-family: DM Sans;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 24px;
+	color: #ffffff;
+	margin: 0px;
+}

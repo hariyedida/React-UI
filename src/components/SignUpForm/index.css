@@ -1,0 +1,46 @@
+.create-user-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 80vh;
+}
+
+.create-user-form-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 75%;
+	background: #fefeff;
+	box-shadow: 0px 8px 40px rgb(7 7 7 / 8%);
+	border-radius: 8px;
+	padding: 45px 25px 45px 25px;
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+.gender-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.gender-label {
+	margin-bottom: 0px;
+}
+.gender-heading {
+	margin: 0px;
+}
+
+.radio {
+	margin-left: 10px;
+	margin-right: 15px;
+	margin-bottom: 3px;
+}
+
+.signup-button-container {
+	align-self: center;
+}
+
+.signup-button {
+	width: 120px;
+}

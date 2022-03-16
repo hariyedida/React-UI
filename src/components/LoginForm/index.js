@@ -14,6 +14,7 @@ class LoginForm extends Component {
 
 	onSubmitSuccess = (jwtToken, userDetails) => {
 		const { history } = this.props;
+		console.log(jwtToken);
 		Cookies.set("jwt_token", jwtToken, {
 			expires: 30,
 			path: "/",
@@ -38,13 +39,16 @@ class LoginForm extends Component {
 		const url = "https://react-user-login-test.herokuapp.com/login";
 		const options = {
 			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify(userDetails),
 		};
-		console.log(JSON.stringify(userDetails));
+
 		const response = await fetch(url, options);
 		const data = await response.json();
 		if (response.ok === true) {
-			this.onSubmitSuccess(data.jwt_token, userDetails);
+			this.onSubmitSuccess(data.jwtToken, userDetails);
 		} else {
 			this.onSubmitFailure(data.error_msg);
 		}
