@@ -57,6 +57,7 @@ class Home extends Component {
 	};
 
 	getDataFromDb = async () => {
+		this.setState({ apiStatus: apiStatusConstants.inProgress });
 		const jwtToken = Cookies.get("jwt_token");
 		const apiUrl = `https://react-user-login-test.herokuapp.com/user-data/`;
 		const options = {
@@ -103,7 +104,6 @@ class Home extends Component {
 	deleteData = async () => {
 		const jwtToken = Cookies.get("jwt_token");
 		this.setState({ apiStatus: apiStatusConstants.inProgress });
-		console.log("Delete");
 		const url = "https://react-user-login-test.herokuapp.com/delete-data";
 		const options = {
 			headers: {
@@ -129,15 +129,14 @@ class Home extends Component {
 	handleFiles = (files) => {
 		const reader = new FileReader();
 		reader.readAsText(files[0]);
-		reader.onload = function (e) {
-			localStorage.setItem("jsonData", e.target.result);
+		reader.onload = (e) => {
+			this.setState(
+				{
+					inputFileData: JSON.parse(e.target.result),
+				},
+				this.postDataToDb
+			);
 		};
-		this.setState(
-			{
-				inputFileData: JSON.parse(localStorage.getItem("jsonData")),
-			},
-			this.postDataToDb
-		);
 	};
 
 	renderFailureView = () => (

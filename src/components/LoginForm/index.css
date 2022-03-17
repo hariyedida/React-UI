@@ -10,6 +10,8 @@
 .login-web-logo-name-container {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	margin-top: 20px;
 }
 
 .web-login-logo {
@@ -62,9 +64,6 @@
 }
 
 @media screen and (max-width: 767px) {
-	.app-title {
-		display: none;
-	}
 	.website-logo {
 		display: none;
 	}
