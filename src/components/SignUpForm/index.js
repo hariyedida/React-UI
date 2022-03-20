@@ -15,6 +15,8 @@ class SignUpForm extends Component {
 		location: "",
 		errorMessage: "",
 		showLoginError: false,
+		showCreateUser: false,
+		successMessage: "",
 	};
 
 	onSubmitFailure = (error) => {
@@ -22,7 +24,7 @@ class SignUpForm extends Component {
 	};
 
 	onSuccessUserCreation = (message) => {
-		this.setState({ errorMessage: message, showLoginError: true });
+		this.setState({ successMessage: message, showCreateUser: true });
 	};
 
 	createNewUser = async (event) => {
@@ -75,6 +77,8 @@ class SignUpForm extends Component {
 			location,
 			showLoginError,
 			errorMessage,
+			showCreateUser,
+			successMessage,
 		} = this.state;
 		const jwtToken = Cookies.get("jwt_token");
 		if (jwtToken !== undefined) {
@@ -185,6 +189,11 @@ class SignUpForm extends Component {
 							</button>
 							{showLoginError && (
 								<p className='login-error-message'>{errorMessage}</p>
+							)}
+							{showCreateUser && (
+								<p className='create-user-success-message'>
+									{successMessage}
+								</p>
 							)}
 						</div>
 					</form>

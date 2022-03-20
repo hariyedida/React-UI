@@ -50,3 +50,8 @@
 	font-family: DM Sans;
 	text-align: center;
 }
+
+.create-user-success-message {
+	color: #164687;
+	font-family: DM Sans;
+}
