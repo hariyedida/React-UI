@@ -29,6 +29,7 @@ class SignUpForm extends Component {
 
 	createNewUser = async (event) => {
 		event.preventDefault();
+		this.setState({ showLoginError: false, showCreateUser: false });
 		const { username, name, password, gender, location } = this.state;
 		const userDetails = { username, name, password, gender, location };
 		const url = "https://react-user-login-test.herokuapp.com/register";
